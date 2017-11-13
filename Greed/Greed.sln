@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greed", "Greed\Greed.csproj", "{58679E91-ED65-499D-A6C3-396AC49A0B0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Greed.Test", "Greed.Test\Greed.Test.csproj", "{A2B0B3F0-84EE-4210-BD89-3E5BEAFEC243}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58679E91-ED65-499D-A6C3-396AC49A0B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58679E91-ED65-499D-A6C3-396AC49A0B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58679E91-ED65-499D-A6C3-396AC49A0B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58679E91-ED65-499D-A6C3-396AC49A0B0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B0B3F0-84EE-4210-BD89-3E5BEAFEC243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B0B3F0-84EE-4210-BD89-3E5BEAFEC243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B0B3F0-84EE-4210-BD89-3E5BEAFEC243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B0B3F0-84EE-4210-BD89-3E5BEAFEC243}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
