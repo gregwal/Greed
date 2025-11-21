@@ -2,8 +2,11 @@
 Greed Kata
 
 Description
+
 Greed is a press-your-luck dice rolling game. In the game, the roller will be rolling dice trying to earn as many points as possible. For the purposes of this kata, we will just be scoring a single roll of five dice.
+
 Requirements
+
 Write code which will calculate the best score based on any given roll using following set of scoring rules.
 • A single one (100)
 • A single five (50)
