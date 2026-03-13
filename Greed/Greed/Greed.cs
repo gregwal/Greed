@@ -1,15 +1,23 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Greed
 {
     public class Dice
     {
         private readonly static int sidesOnDice = 6;
+
+        public int[] RollDice(int numberOfDice)
+        {
+            Random random = new Random();
+            int[] dice = new int[numberOfDice];
+            for (int i = 0; i < numberOfDice; i++)
+            {
+                dice[i] = random.Next(1, sidesOnDice + 1);
+            }
+            return dice;
+        }
 
         public int GetScore(int[] diceRolls)
         {
@@ -19,57 +27,46 @@ namespace Greed
 
         private static int CalculateDiceScore(Dictionary<int, int> diceRollsCount)
         {
-            int singleOne = 100;
-            int singleFive = 50;
-            int straightScore = 1200;
-            int threePairScore = 800;
-            int underTriple = 2;
-            int score = 0;
             Dictionary<int, int> tripleScore = new Dictionary<int, int> { { 1, 1000 }, { 2, 200 }, { 3, 300 }, { 4, 400 }, { 5, 500 }, { 6, 600 } };
             Dictionary<int, int> ofKindMultiple = new Dictionary<int, int> { { 6, 8 }, { 5, 4 }, { 4, 2 }, { 3, 1 } };
 
-            // score a straight
-            if (diceRollsCount.Count(dc => dc.Value == 1) == 6 )
-            {
-                score = straightScore;
-            }
+            // Straight: one of each face [1,2,3,4,5,6]
+            if (diceRollsCount.All(d => d.Value == 1))
+                return 1200;
 
-            // score three pairs
+            // Three pairs: exactly three different values each appearing twice
             if (diceRollsCount.Count(d => d.Value == 2) == 3)
-            {
-                score = threePairScore;
-            }
+                return 800;
 
-            if (score == 0)
+            int score = 0;
+
+            for (int diceSide = 1; diceSide <= sidesOnDice; diceSide++)
             {
-                // Score multiples of three or higher
-                if (diceRollsCount.Count(d => d.Value >= 3) >= 1)
+                int count = diceRollsCount[diceSide];
+
+                if (count >= 3)
                 {
-                    // for each side of dice
-                    for (int diceSide = 1; diceSide <= sidesOnDice ; diceSide++)
-                    {
-                        for (int i = sidesOnDice; i >= 3; i--)
-                        {
-                            if (diceRollsCount[diceSide] == (i))
-                            { 
-                                score = tripleScore[diceSide] * ofKindMultiple[i];
-                                break;
-                            }
-                        }
-                    }
+                    // Score triple or higher (4/5/6-of-a-kind multiply the triple score)
+                    score += tripleScore[diceSide] * ofKindMultiple[count];
                 }
-
-                // score the singles
-                if (diceRollsCount[1] <= underTriple)
-                    score = score + (diceRollsCount[1] * singleOne);
-
-                if (diceRollsCount[5] <= underTriple)
-                    score = score + (diceRollsCount[5] * singleFive);
+                else
+                {
+                    // Score singles — only 1s and 5s count
+                    if (diceSide == 1)
+                        score += count * 100;
+                    else if (diceSide == 5)
+                        score += count * 50;
+                }
             }
 
             return score;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="diceRolls"></param>
+        /// <returns></returns>
         private static Dictionary<int, int> GetDiceRollsCount(int[] diceRolls)
         {
             Dictionary<int, int> diceRollsCount = new Dictionary<int, int>();
@@ -83,7 +80,7 @@ namespace Greed
                 {
                     if (diceRoll == diceSide)
                     {
-                        diceRollsCount[diceSide] = diceRollsCount[diceSide]++;
+                        diceRollsCount[diceSide]++;
                     }
                 }
             }
